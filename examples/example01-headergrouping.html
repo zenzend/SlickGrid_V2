@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>SlickGrid example: Header Grouping</title>
+
+<link rel="stylesheet" href="examples.css" type="text/css"/>
+<link rel="stylesheet" href="../slick.grid.css" type="text/css"/>
+<link rel="stylesheet" href="../css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
+    <script src="../lib/jquery-1.11.1.js"></script>
+    <script src="../lib/jquery.event.drag-2.2.js"></script>
+
+    <script src="../slick.core.js"></script>
+    <script src="../slick.grid.js"></script>
+
+</head>
+<body>
+    <table width="100%">
+        <tr>
+            <td valign="top" width="50%">
+                <div id="myGrid" style="width: 1000px; height: 500px;"></div>
+            </td>
+            <td valign="top">
+                <h2>Demonstrates:</h2>
+                <ul>
+                    <li>Grid header grouping</li>
+					<li>Currently supports one-level of grouping.</li>
+                </ul>
+                <h2>Following features to be included in upcoming check-ins:</h2>
+                <ul>
+                    <li>1. Swapping columns with this feature enabled.</li>
+                    <li>2. Extend additional properties as like normal columns for group information.</li>
+					<li>3. Multi-level grouping.</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <script>
+        var grid;
+        var mychildren=new Array();
+        mychildren.push({ id: "child1", name: "child1", field: "child1", width: 100,cssClass: "cellNumber" });
+        mychildren.push({ id: "child2", name: "child2", field: "child2", width: 110,cssClass: "cellNumber" });
+        mychildren.push({ id: "child3", name: "child3", field: "child3", width: 120,cssClass: "cellNumber" });
+        // mychildren.push({ id: "child4", name: "child4", field: "child4", width: 80 });
+
+        var mycol=new Array();
+        mycol.push({ id: 'fieldid',name: '#', field : 'id', behavior: "select",width: 50,cssClass: "cell-selection"});
+        mycol.push({ id: "title", name: "Title", field: "title", width: 100, });
+        mycol.push({ id: 'common', name: 'Header Columns Grouping', columns: mychildren });
+     
+        var options = {
+            enableCellNavigation: true,
+            enableColumnReorder: false
+        };
+
+        $(function () {
+            var data = [];
+            for (var i = 0; i < 500; i++) {
+                data[i] = {
+                    id:i + 1,
+                    title: "Task " + i,
+                    child1: "5 days",
+                    child2: Math.round(Math.random() * 100),
+                    child3: "20/01/2015",
+                };
+            }
+
+            grid = new Slick.Grid("#myGrid",data, mycol, options);
+        })
+</script>
+</body>
+</html>
